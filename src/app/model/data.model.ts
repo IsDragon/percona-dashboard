@@ -20,7 +20,6 @@ export interface postResponse {
     message: string
 }
 
-
 export interface deletePerson {
     rNumber: number;
     name: string;
@@ -30,6 +29,11 @@ export interface personDetails {
     email: string;
     age: string;
 }
+export interface yaml{
+    workloadyaml:string,
+    nameSpaceyaml:string,
+    workloadName:string
+}
 export interface statefulSet {
     kind: string,
     name: string,
@@ -38,7 +42,8 @@ export interface statefulSet {
     pvc: string,
     status: string,
     nodeName: string,
-    adjacency: string
+    adjacency: string,
+    dockerImage: string
 }
 
 export interface jivaReplica {
@@ -89,7 +94,8 @@ export interface overAllStatus {
         pvc: string,
         status: string,
         nodeName: string,
-        adjacency: string
+        adjacency: string,
+        dockerImage: string
     }],
     jivaReplica: [{
         kind: string,

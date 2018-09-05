@@ -10,7 +10,8 @@ import {
   applicationPod,
   overAllStatus,
   pvc,
-  personDetail
+  personDetail,
+  yaml
 } from "../../../model/data.model";
 import * as $ from "jquery";
 import { Subscription, Observable, timer } from "rxjs";
@@ -34,12 +35,16 @@ export class WorkloddetailsComponent implements OnInit {
   public postResponses: postResponse;
   public getResponses: getResponse[] = [];
   public personDetails: personDetail[] = [];
+  public namespaceyaml = "";
+  public workloadyaml = "";
+  public workloadName = "";
   public pvc: pvc[] = [];
   public pvctemp;
   public pvcarray;
   public namespace = "";
   public dockerImage = "";
   public openebsversion = "";
+  public workloadImage = "";
   public overallStatus = "";
   public runningStatus = false;
   public failledStatus = false;
@@ -88,18 +93,18 @@ export class WorkloddetailsComponent implements OnInit {
   public getmessage;
   public poststatus;
   public postmessage;
-  constructor(private personService: PersonService,private kubernetsServices:KubernetsService,private litmusServies:LitmusService) {
+  constructor(private personService: PersonService, private kubernetsServices: KubernetsService, private litmusServies: LitmusService) {
     this.windowWidth = window.innerWidth;
   }
 
   ngOnInit() {
-    // this.personService.getJivaVolumeDetails().subscribe(res => {
-    //   this.jivaDetail = res;
-    //   this.jivas = this.jivaDetail.data.items;
-    //   // console.log(this.jivaDetail.data.items[0]);
-    // });
 
-    // console.log("init started.. ");
+    this.personService.getYamls().subscribe(res => {
+      this.workloadName = res.workloadName;
+      this.namespaceyaml = res.nameSpaceyaml;
+      this.workloadyaml = res.workloadyaml;
+    });
+
     for (let j = 0; j < 100; j++) {
       for (let i = 0; i < 10; i++) {
         this.randomString1 =
@@ -122,56 +127,52 @@ export class WorkloddetailsComponent implements OnInit {
       $(".hide-custom").hide();
     }
 
-    // timer(0, 5000).subscribe(x => {
-    //   this.kubernetsServices.getPodDetails().subscribe(res => {
-    //     console.log(res);
-    //     this.statefullSets = res.statefulSet;
-    //     this.applicationPods = res.applicationPod;
-    //     this.jivaContrllers = res.jivaController;
-    //     this.jivaReplicas = res.jivaReplica;
-    //     this.pvc = res.pvc;
-    //     this.pvctemp = res.pvc;
-    //     this.pvcarray = this.pvctemp.pvc;
-    //     console.log(this.pvcarray);
+    timer(0, 5000).subscribe(x => {
+      this.kubernetsServices.getPodDetails().subscribe(res => {
+        this.statefullSets = res.statefulSet;
+        this.applicationPods = res.applicationPod;
+        this.jivaContrllers = res.jivaController;
+        this.jivaReplicas = res.jivaReplica;
+        this.pvc = res.pvc;
+        this.pvctemp = res.pvc;
+        this.pvcarray = this.pvctemp.pvc;
+        // console.log(this.pvcarray);
 
-    //     // this.jivaReplicas.forEach(function(replica) {
-    //     //   if (replica.status == "Terminating") {
-    //     //     setTimeout(function() {}, 8000);
-    //     //   }
-    //     // });
+        // this.jivaReplicas.forEach(function(replica) {
+        //   if (replica.status == "Terminating") {
+        //     setTimeout(function() {}, 8000);
+        //   }
+        // });
+        this.workloadImage = this.statefullSets[0].dockerImage;
+        this.dockerImage = this.jivaContrllers[0].openebsjivaversion;
+        this.openebsversion =
+          "OpenEBS:" + this.jivaContrllers[0].openebsjivaversion.split(":")[1];
+        this.namespace = this.jivaContrllers[0].namespace;
+        this.overallStatus = res.status;
 
-    //     // console.log(res.pvc);
-    //     // console.log(res);
-    //     // console.log(this.pvcDetail +'hgvhjgvkhgvkhvkjhvkjh');
-    //     this.dockerImage = this.jivaContrllers[0].openebsjivaversion;
-    //     this.openebsversion =
-    //       "OpenEBS:" + this.jivaContrllers[0].openebsjivaversion.split(":")[1];
-    //     this.namespace = this.jivaContrllers[0].namespace;
-    //     this.overallStatus = res.status;
-    //     if (this.overallStatus == "Running") {
-    //       this.runningStatus = true;
-    //     } else if (
-    //       this.overallStatus == "Pending" ||
-    //       this.overallStatus == "Failed"
-    //     ) {
-    //       this.failledStatus = true;
-    //     } else {
-    //       this.unknownStatus = true;
-    //     }
+        if (this.overallStatus == "Running") {
+          this.runningStatus = true;
+        } else if (
+          this.overallStatus == "Pending" ||
+          this.overallStatus == "Failed"
+        ) {
+          this.failledStatus = true;
+        } else {
+          this.unknownStatus = true;
+        }
 
-    //     error => {
-    //       this.unknownStatus = true;
-    //       console.log(res);
-    //     };
-    //   });
-    // });
+        error => {
+          this.unknownStatus = true;
+          // console.log(res);
+        };
+      });
+    });
   }
 
   public listVolume() {
     this.kubernetsServices.getJivaVolumeDetails().subscribe(res => {
       this.jivaDetail = res;
       this.jivas = this.jivaDetail.data.items;
-      // console.log(this.jivaDetail.data.items[0]);
     });
   }
 
@@ -179,39 +180,29 @@ export class WorkloddetailsComponent implements OnInit {
     this.personService
       .save100PersonDetails(this.personDetails)
       .subscribe(res => {
-        console.log(res);
-        // console.log(res);
-        // console.log(res);
-        // this.postResponses = res;
-        // this.postResponses=res.;
-        // this.poststatus = this.postResponses.status;
-        // this.postmessage = this.postResponses.message;
-        // this.writeStatus = true;
+        this.postResponses = res;
+        this.poststatus = this.postResponses.status;
+        this.postmessage = this.postResponses.message;
+        this.writeStatus = true;
       });
 
-    // setTimeout(
-    //   function() {
-    //     this.writeStatus = false;
-    //     // console.log(this.writeStatus);
-    //   }.bind(this),
-    //   5000
-    // );
+    setTimeout(
+      function() {
+        this.writeStatus = false;
+      }.bind(this),
+      5000
+    );
   }
   public read() {
     this.personService.get100personDetails(this.rnumber).subscribe(res => {
-      // console.log(JSON.stringify(res.status));
-      // this.getResponses[0].status = res.status;
       this.getResponses[0] = res;
-      // this.getResponses.message = res.message;
       this.getstatus = this.getResponses[0].status;
       this.getmessage = this.getResponses[0].message;
-      console.log(res.status);
       this.readStatus = true;
     });
     setTimeout(
-      function() {
+      function () {
         this.readStatus = false;
-        // console.log(this.writeStatus);
       }.bind(this),
       5000
     );

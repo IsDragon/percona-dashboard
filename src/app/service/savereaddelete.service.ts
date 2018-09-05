@@ -1,20 +1,21 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 import { Subject } from "rxjs";
-import { personDetail, deletePerson, personDetails, getResponse, postResponse } from "../model/data.model";
+import { personDetail, deletePerson, personDetails, getResponse, postResponse, yaml } from "../model/data.model";
 
 @Injectable()
 export class PersonService {
   private saveDetails: personDetail[] = [];
   private deletePersonDetails: deletePerson[] = [];
   private personDetails: personDetails[] = [];
+  private yamls: yaml;
   private apiurl: string;
   private host: string;
   private rnumber = Math.floor(Math.random() * 10000000);
 
   constructor(private http: HttpClient) {
     this.host = window.location.host;
-    if ((this.host.toString().indexOf("localhost")+1) && this.host.toString().indexOf(":")) {
+    if ((this.host.toString().indexOf("localhost") + 1) && this.host.toString().indexOf(":")) {
       this.apiurl = "http://localhost:3000/";
     } else {
       this.apiurl = "https://" + window.location.host + "/api/";
@@ -25,7 +26,7 @@ export class PersonService {
   save100PersonDetails(allDetails) {
     const saveDetails: personDetail = allDetails;
     return this.http.post<postResponse>(
-      this.apiurl + "person/save1",
+      this.apiurl + "person/save",
       saveDetails
     );
   }
@@ -65,5 +66,7 @@ export class PersonService {
       this.apiurl + "person/read/" + this.rnumber
     );
   }
-
+  getYamls() {
+    return this.http.get<yaml>(this.apiurl + "workloads/yaml")
+  }
 }

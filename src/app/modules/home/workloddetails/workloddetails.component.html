@@ -4,9 +4,9 @@
     <div class="row">
       <div class="col-md-12">
         <ul class="d-flex align-items-center">
-          <li><img src="assets/images/mongodb-logo.png" alt=""></li>
-          <li><img src="assets/images/mule-without-tagline.png" alt="">{{openebsversion}}</li>
-          <li><img src="assets/images/k8s.png" alt="">Namespace:{{namespace}}</li>
+          <li><img src="assets/images/workloads-logos/{{workloadName}}.svg" alt="">{{workloadImage}}</li>
+          <li><img src="assets/images/company-logos/mule-without-tagline.png" alt="">{{openebsversion}}</li>
+          <li><img src="assets/images/company-logos/k8s.png" alt="">Namespace :{{namespace}}</li>
         </ul>
       </div>
     </div>
@@ -15,7 +15,7 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-6">
       <div class="text-center">
         <p> Application </p>
       </div>
@@ -24,8 +24,8 @@
           <div class="workload-deatils" *ngFor="let pvc of pvcarray">
             <div *ngFor="let statefulset of statefullSets">
               <p *ngIf="statefulset.pvc === pvc.name ">
-                <img src="assets/images/mongodb-logo.png" height="30" alt=""><span placement="bottom" ngbTooltip="{{statefulset.name}}">
-                  {{statefulset.name}}</span> on <span placement="bottom" ngbTooltip="{{statefulset.nodeName}}">{{statefulset.node}}</span>
+                <img src="assets/images/workloads-logos/{{workloadName}}.svg" height="30" alt=""><span placement="bottom" ngbTooltip="{{statefulset.name}}">
+                  {{workloadName}}</span> on <span placement="bottom" ngbTooltip="{{statefulset.nodeName}}">{{statefulset.node}}</span>
                 <i style="margin-left:5px" class="float-right fas" [ngClass]="{
               'fa-check text-success':statefulset.status === 'Running',   
               'fa-times text-danger':statefulset.status === 'Pending' || statefulset.status === 'Failed',
@@ -35,7 +35,7 @@
             </div>
             <div *ngFor="let jivaContrller of jivaContrllers;let i = index">
               <p *ngIf="jivaContrller.pvc === pvc.name">
-                <img src="assets/images/mule-without-tagline.png" height="30" alt="" style="margin-right:10px"><span placement="bottom"
+                <img src="assets/images/company-logos/mule-without-tagline.png" height="30" alt="" style="margin-right:10px"><span placement="bottom"
                   ngbTooltip="{{jivaContrller.name}}">cntl</span>-{{i}}  on <span placement="bottom" ngbTooltip="{{jivaContrller.nodeName}}">{{jivaContrller.node}}</span><i
                   style="margin-left:5px" class="float-right fas" [ngClass]="{
             'fa-check text-success':jivaContrller.status === 'Running',   
@@ -46,7 +46,7 @@
             </div>
             <div *ngFor="let jivaReplica of jivaReplicas; let j = index">
               <p *ngIf="jivaReplica.pvc === pvc.name">
-                <img src="assets/images/mule-without-tagline.png" height="30" alt="" style="margin-right:10px"><span placement="bottom"
+                <img src="assets/images/company-logos/mule-without-tagline.png" height="30" alt="" style="margin-right:10px"><span placement="bottom"
                   ngbTooltip="{{jivaReplica.name}}">Replica</span>-{{j}} on <span placement="bottom" ngbTooltip="{{jivaReplica.nodeName}}">{{jivaReplica.node}}</span><i
                   style="margin-left:5px" class="float-right fas" [ngClass]="{
               'fa-check text-success':jivaReplica.status === 'Running',
@@ -155,11 +155,11 @@
             <tbody>
               <tr class="d-flex justify-content-between ">
                 <td>Namespace</td>
-                <td><a href="https://github.com/openebs/e2e-infrastructure/blob/f4eca2863c92609cee825a35aac4c253e7adb772/production/mongo-jiva/mongo-jiva-namespace.yaml "
-                    target="_blank "> <button class="btn btn-secondary "><i class="fas fa-cog "></i> View</button></a></td>
+                <td><a href="{{namespaceyaml}}"
+                    target="blank "> <button class="btn btn-secondary "><i class="fas fa-cog "></i> View</button></a></td>
                 <td></td>
-                <td><a href="https://github.com/openebs/e2e-infrastructure/blob/f4eca2863c92609cee825a35aac4c253e7adb772/production/mongo-jiva/mongo-jiva-mongo.yaml "
-                    target="_blank "> <button class="btn btn-secondary "><i class="fas fa-cog "></i> View</button></a></td>
+                <td>  <a href="{{workloadyaml}}"
+                    target="blank "> <button class="btn btn-secondary "><i class="fas fa-cog "></i> View</button></a></td>
               </tr>
             </tbody>
           </table>
