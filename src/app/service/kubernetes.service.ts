@@ -18,7 +18,7 @@ export class KubernetsService {
   }
 
   getJivaVolumeDetails() {
-    return this.http.get(this.apiurl + "openebs/volume/");
+    return this.http.get(this.apiurl + "openebs/volume");
   }
 
   getPodDetails() {
