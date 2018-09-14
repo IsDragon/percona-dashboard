@@ -68,7 +68,7 @@
           <tbody>
             <tr>
               <td style="padding-left: 70px;">
-                <span placement="bottom" ngbTooltip="Generate random write operation on Mongo application">Write Operations</span>
+                <span placement="bottom" ngbTooltip="Generate random write operation on {{workloadName}} application">Write Operations</span>
               </td>
               <td style="padding-left: 240px;">
                 <button class="btn btn-pill btn-secondary action-button btn-sm" (click)="save()">
@@ -84,7 +84,7 @@
             </tr>
             <tr>
               <td style="padding-left: 70px;">
-                <span placement="bottom" ngbTooltip="Perform read operation on Mongo application">Read Operations</span>
+                <span placement="bottom" ngbTooltip="Perform read operation on {{workloadName}} application">Read Operations</span>
               </td>
               <td style="padding-left: 240px;">
                 <button class="btn btn-pill btn-secondary action-button btn-sm" (click)="read()">
@@ -99,7 +99,7 @@
                 </div>
               </td>
             </tr>
-            <tr>
+            <!-- <tr>
               <td style="padding-left: 70px;"> Induce Chaos </td>
               <td style="padding-left: 55px;">
                 <div class="row">
@@ -116,7 +116,7 @@
                   </div>
                 </div>
               </td>
-            </tr>
+            </tr> -->
             <tr>
               <td></td>
               <td style="padding-left: 40px;">
