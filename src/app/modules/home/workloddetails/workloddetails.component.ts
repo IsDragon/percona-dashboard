@@ -172,7 +172,7 @@ export class WorkloddetailsComponent implements OnInit {
   public listVolume() {
     this.kubernetsServices.getJivaVolumeDetails().subscribe(res => {
       this.jivaDetail = res;
-      this.jivas = this.jivaDetail.data.items;
+      this.jivas = this.jivaDetail;
     });
   }
 
