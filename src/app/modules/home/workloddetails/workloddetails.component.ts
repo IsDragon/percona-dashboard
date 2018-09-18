@@ -35,6 +35,7 @@ export class WorkloddetailsComponent implements OnInit {
   public postResponses: postResponse;
   public getResponses: getResponse[] = [];
   public personDetails: personDetail[] = [];
+  public numberstatefullSets = 0;
   public namespaceyaml = "";
   public workloadyaml = "";
   public workloadName = "";
@@ -149,7 +150,7 @@ export class WorkloddetailsComponent implements OnInit {
           "OpenEBS:" + this.jivaContrllers[0].openebsjivaversion.split(":")[1];
         this.namespace = this.jivaContrllers[0].namespace;
         this.overallStatus = res.status;
-
+        this.numberstatefullSets = this.statefullSets.length;
         if (this.overallStatus == "Running") {
           this.runningStatus = true;
         } else if (
