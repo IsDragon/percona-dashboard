@@ -24,7 +24,8 @@
           <div class="workload-deatils" *ngFor="let pvc of pvcarray">
             <div *ngFor="let statefulset of statefullSets">
               <p *ngIf="statefulset.pvc === pvc.name ">
-                <img src="assets/images/workloads-logos/{{workloadName}}.svg" height="30" alt=""><span placement="bottom" ngbTooltip="{{statefulset.name}}">
+                <img src="assets/images/workloads-logos/{{workloadName}}.svg" height="30" alt=""><span placement="bottom"
+                  ngbTooltip="{{statefulset.name}}">
                   {{workloadName}}</span> on <span placement="bottom" ngbTooltip="{{statefulset.nodeName}}">{{statefulset.node}}</span>
                 <i style="margin-left:5px" class="float-right fas" [ngClass]="{
               'fa-check text-success':statefulset.status === 'Running',   
@@ -35,9 +36,10 @@
             </div>
             <div *ngFor="let jivaContrller of jivaContrllers;let i = index">
               <p *ngIf="jivaContrller.pvc === pvc.name">
-                <img src="assets/images/company-logos/mule-without-tagline.png" height="30" alt="" style="margin-right:10px"><span placement="bottom"
-                  ngbTooltip="{{jivaContrller.name}}">cntl</span>-{{i}}  on <span placement="bottom" ngbTooltip="{{jivaContrller.nodeName}}">{{jivaContrller.node}}</span><i
-                  style="margin-left:5px" class="float-right fas" [ngClass]="{
+                <img src="assets/images/company-logos/mule-without-tagline.png" height="30" alt="" style="margin-right:10px"><span
+                  placement="bottom" ngbTooltip="{{jivaContrller.name}}">cntl</span>-{{i}} on <span placement="bottom"
+                  ngbTooltip="{{jivaContrller.nodeName}}">{{jivaContrller.node}}</span><i style="margin-left:5px" class="float-right fas"
+                  [ngClass]="{
             'fa-check text-success':jivaContrller.status === 'Running',   
             'fa-times text-danger':jivaContrller.status === 'Pending' || jivaContrller.status === 'Failed',
             'fa-exclamation-triangle text-warning':jivaContrller.status === 'Unknown'
@@ -46,9 +48,10 @@
             </div>
             <div *ngFor="let jivaReplica of jivaReplicas; let j = index">
               <p *ngIf="jivaReplica.pvc === pvc.name">
-                <img src="assets/images/company-logos/mule-without-tagline.png" height="30" alt="" style="margin-right:10px"><span placement="bottom"
-                  ngbTooltip="{{jivaReplica.name}}">Replica</span>-{{j}} on <span placement="bottom" ngbTooltip="{{jivaReplica.nodeName}}">{{jivaReplica.node}}</span><i
-                  style="margin-left:5px" class="float-right fas" [ngClass]="{
+                <img src="assets/images/company-logos/mule-without-tagline.png" height="30" alt="" style="margin-right:10px"><span
+                  placement="bottom" ngbTooltip="{{jivaReplica.name}}">Replica</span>-{{j}} on <span placement="bottom"
+                  ngbTooltip="{{jivaReplica.nodeName}}">{{jivaReplica.node}}</span><i style="margin-left:5px" class="float-right fas"
+                  [ngClass]="{
               'fa-check text-success':jivaReplica.status === 'Running',
               'fa-times text-danger':jivaReplica.status === 'Pending' || jivaReplica.status === 'Failed' || jivaReplica.status === 'Terminating',
               'fa-exclamation-triangle text-warning':jivaReplica.status === 'Unknown'
@@ -68,14 +71,16 @@
           <tbody>
             <tr>
               <td style="padding-left: 70px;">
-                <span placement="bottom" ngbTooltip="Generate random write operation on {{workloadName}} application">Write Operations</span>
+                <span placement="bottom" ngbTooltip="Generate random write operation on {{workloadName}} application">Write
+                  Operations</span>
               </td>
               <td style="padding-left: 240px;">
                 <button class="btn btn-pill btn-secondary action-button btn-sm" (click)="save()">
                   Go </button>
               </td>
               <td style="text-align: center;">
-                <div class="btn btn-pill status-button" *ngIf="writeStatus" placement="bottom" ngbTooltip="{{postmessage}}" [ngClass]="{
+                <div class="btn btn-pill status-button" *ngIf="writeStatus" placement="bottom" ngbTooltip="{{postmessage}}"
+                  [ngClass]="{
                           'btn-success':poststatus===200,
                           'btn-danger':poststatus===500
                         }">{{poststatus}}
@@ -84,7 +89,8 @@
             </tr>
             <tr>
               <td style="padding-left: 70px;">
-                <span placement="bottom" ngbTooltip="Perform read operation on {{workloadName}} application">Read Operations</span>
+                <span placement="bottom" ngbTooltip="Perform read operation on {{workloadName}} application">Read
+                  Operations</span>
               </td>
               <td style="padding-left: 240px;">
                 <button class="btn btn-pill btn-secondary action-button btn-sm" (click)="read()">
@@ -92,7 +98,8 @@
                 </button>
               </td>
               <td style="text-align: center;">
-                <div class="btn btn-pill status-button" *ngIf="readStatus" placement="bottom" ngbTooltip="{{getmessage}}" [ngClass]="{
+                <div class="btn btn-pill status-button" *ngIf="readStatus" placement="bottom" ngbTooltip="{{getmessage}}"
+                  [ngClass]="{
                             'btn-success':getstatus===200,
                             'btn-danger':getstatus===500
                           }">{{getstatus}}
@@ -121,9 +128,11 @@
               <td></td>
               <td style="padding-left: 40px;">
                 <div>
-                  <select class="custom-select hide-custom" id="application" (change)="onAppSelect($event.target.value)" style="width:180px;">
+                  <select class="custom-select hide-custom" id="application" (change)="onAppSelect($event.target.value)"
+                    style="width:180px;">
                     <option selected value="">Select Application..</option>
-                    <option *ngFor="let statefulset of statefullSets" value="{{statefulset.name}} "> {{statefulset.name}}
+                    <option *ngFor="let statefulset of statefullSets" value="{{statefulset.name}} ">
+                      {{statefulset.name}}
                     </option>
                   </select>
                 </div>
@@ -155,11 +164,11 @@
             <tbody>
               <tr class="d-flex justify-content-between ">
                 <td>Namespace</td>
-                <td><a href="{{namespaceyaml}}"
-                    target="blank "> <button class="btn btn-secondary "><i class="fas fa-cog "></i> View</button></a></td>
+                <td><a href="{{namespaceyaml}}" target="blank "> <button class="btn btn-secondary "><i class="fas fa-cog "></i>
+                      View</button></a></td>
                 <td></td>
-                <td>  <a href="{{workloadyaml}}"
-                    target="blank "> <button class="btn btn-secondary "><i class="fas fa-cog "></i> View</button></a></td>
+                <td> <a href="{{workloadyaml}}" target="blank "> <button class="btn btn-secondary "><i class="fas fa-cog "></i>
+                      View</button></a></td>
               </tr>
             </tbody>
           </table>
@@ -186,23 +195,19 @@
           <table class="table " *ngFor="let volume of jivas ">
             <tr>
               <td>Volume Name:</td>
-              <td>{{volume.metadata.name}}</td>
+              <td>{{volume.name}}</td>
             </tr>
             <tr>
-              <td>Controller Status:</td>
-              <td>{{volume.metadata.annotations['vsm.openebs.io/controller-status']}}</td>
+              <td>Status:</td>
+              <td>{{volume.status}}</td>
             </tr>
             <tr>
               <td>Replica Count:</td>
-              <td>{{volume.metadata.annotations['vsm.openebs.io/replica-count']}}</td>
-            </tr>
-            <tr>
-              <td>Replica status:</td>
-              <td>{{volume.metadata.annotations['vsm.openebs.io/replica-status']}}</td>
+              <td>{{volume.replicas}}</td>
             </tr>
             <tr>
               <td>Capacity:</td>
-              <td>{{volume.metadata.annotations['vsm.openebs.io/volume-size']}}</td>
+              <td>{{volume.size}}</td>
             </tr>
           </table>
         </div>
