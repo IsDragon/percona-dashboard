@@ -40,7 +40,7 @@
             <div *ngFor="let jivaContrller of jivaContrllers;let i = index">
               <p *ngIf="jivaContrller.pvc === pvc.name">
                 <img src="assets/images/company-logos/mule-without-tagline.png" height="30" alt="" style="margin-right:10px"><span
-                  placement="bottom" ngbTooltip="{{jivaContrller.name}}">cntl</span>-{{i}} on <span placement="bottom"
+                  placement="bottom" ngbTooltip="{{jivaContrller.name}}">ctrl</span>-{{i}} on <span placement="bottom"
                   ngbTooltip="{{jivaContrller.nodeName}}">{{jivaContrller.node}}</span><i style="margin-left:5px" class="float-right fas"
                   [ngClass]="{
             'fa-check text-success':jivaContrller.status === 'Running',   
@@ -169,7 +169,7 @@
                 <td>Namespace</td>
                 <td><a href="{{namespaceyaml}}" target="blank "> <button class="btn btn-secondary "><i class="fas fa-cog "></i>
                       View</button></a></td>
-                <td></td>
+                <td>{{workloadName |titlecase}}</td>
                 <td> <a href="{{workloadyaml}}" target="blank "> <button class="btn btn-secondary "><i class="fas fa-cog "></i>
                       View</button></a></td>
               </tr>
