@@ -52,7 +52,6 @@ export class WorkloddetailsComponent implements OnInit {
   public unknownStatus = false;
   public chaosTests = [
     "Kill OpenEBS Replica",
-    "Kill Application Pod",
     "Increase Latency Between App and Replicas"
   ];
   public selectedChaos = "";
@@ -224,21 +223,21 @@ export class WorkloddetailsComponent implements OnInit {
     this.selectedApplication = appValue;
   }
 
-  public runChaosTest(chaos: string, app: string) {
+  public runChaosTest(type: string, app: string) {
     // console.log(chaos);
     // console.log(app);
-    if (chaos != "" && app != "") {
+    if (type != "" && app != "") {
       for (let i = 0; i < this.chaosTests.length; i++) {
         // console.log(chaos);
         // console.log(this.chaosTests[i]);
-        if (chaos.trim() == this.chaosTests[i]) {
-          chaos = i.toString();
+        if (type.trim() == this.chaosTests[i]) {
+          type = i.toString();
           // console.log(this.chaosURLAttribute);
           break;
         }
       }
       // console.log("inside");
-      this.litmusServies.runChaosTestService(chaos, app.trim());
+      this.litmusServies.runChaosTestService(type, app.trim());
     }
   }
   public titleCaseWord(word: string) {
