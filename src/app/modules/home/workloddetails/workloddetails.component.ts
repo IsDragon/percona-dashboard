@@ -28,6 +28,7 @@ export class WorkloddetailsComponent implements OnInit {
   private windowWidth;
   private rnumber = Math.floor(Math.random() * 10000000);
   public statefullSets: statefulSet[] = [];
+  public litmuspod: statefulSet[] = [];
   public jivaContrllers: jivaController[] = [];
   public jivaReplicas: jivaReplica[] = [];
   public applicationPods: applicationPod[] = [];
@@ -161,6 +162,10 @@ export class WorkloddetailsComponent implements OnInit {
         };
       });
     });
+
+    this.kubernetsServices.getPodDetails().subscribe(res => {
+      this.litmuspod = res.statefulSet;
+    })
   }
 
   public listVolume() {

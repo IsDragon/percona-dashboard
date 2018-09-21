@@ -137,7 +137,7 @@
                   <select class="custom-select hide-custom" id="application" (change)="onAppSelect($event.target.value)"
                     style="width:180px;">
                     <option selected value="">Select Application..</option>
-                    <option *ngFor="let statefulset of statefullSets" value="{{statefulset.name}} ">
+                    <option *ngFor="let statefulset of litmuspod" value="{{statefulset.name}} ">
                       {{statefulset.name}}
                     </option>
                   </select>
